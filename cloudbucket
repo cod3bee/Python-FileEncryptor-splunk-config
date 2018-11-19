@@ -1,0 +1,10 @@
+from google.cloud import storage
+
+storage_client = storage.Client.from_service_account_json('Splunk-546f9ab220f9.json')
+
+print(buckets = list(storage_client.list_buckets()))
+bucket = storage_client.get_bucket('mybucket008')
+blob = bucket.blob('test-blob')
+blob.upload_from_filename('C:\\Users\\prashantkumar_g\\Desktop\\splunk1\\Google Map API key.txt.aes.txt.aes')
+
+
