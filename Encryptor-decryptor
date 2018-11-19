@@ -1,0 +1,58 @@
+from tkinter import *
+import shutil
+import pyAesCrypt
+import os
+master = Tk()
+
+def encrypt():
+    newwin = Toplevel(master)
+    def hojahoo():
+        x=Label(newwin,text="File has been encrypted")
+        x.pack()
+        data=variable.get()
+        bufferSize = 64 * 1024
+        password = "nahidunga"
+        pyAesCrypt.encryptFile("C:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data, "C:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data+".aes", password, bufferSize)
+        src="c:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data
+        dst="c:\\Users\\prashantkumar_g\\Desktop\\splunk2\\"+data
+        shutil.move(src,dst)
+    m = Label(newwin, text="select file to encrypt")
+    a = os.listdir('C:\\users\\prashantkumar_g\\Desktop\\splunk1')
+    master.title("Encrypting Files")
+    variable = StringVar(master)
+    w= OptionMenu(newwin, variable,*a)
+    m.pack()
+    w.pack()
+    MyButton1 = Button(newwin, text="Submit", width=10,command=hojahoo)
+    MyButton1.pack()
+    
+    
+def decrypt():
+    newwind = Toplevel(master)
+    def dejavu():
+        x=Label(newwind,text="File has been decrypted")
+        x.pack()
+        
+
+        data=variable.get()
+        buffersize= 64 * 1024
+        password="nahidunga"
+        pyAesCrypt.decryptFile("C:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data, "C:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data+".txt", password, buffersize)
+        src="c:\\Users\\prashantkumar_g\\Desktop\\splunk1\\"+data
+        dst="c:\\Users\\prashantkumar_g\\Desktop\\splunk2\\"+data
+        shutil.move(src,dst)
+        
+    m = Label(newwind, text="select file to decrypt")
+    a = os.listdir('C:\\users\\prashantkumar_g\\Desktop\\splunk1')
+    variable = StringVar(master)
+    w= OptionMenu(newwind, variable,*a)
+    m.pack()
+    w.pack()
+    MyButton1 = Button(newwind, text="Submit", width=10,command=dejavu)
+    MyButton1.pack()
+    
+MyButton2 = Button(master, text="Encrypt", width=10,command=encrypt)
+MyButton3 = Button(master, text="Decrypt", width=10,command=decrypt)
+MyButton2.pack()
+MyButton3.pack()
+mainloop()
